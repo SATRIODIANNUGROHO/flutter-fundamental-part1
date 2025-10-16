@@ -7,3 +7,7 @@ A new Flutter project
 Add Text Widget
 
 ![screenshot hello_world](images/02.jpg)
+
+Add Image Widget
+
+![screenshot hello_world](images/03.png)
