@@ -17,3 +17,7 @@ Add Dialog Widget
 ![screenshot hello_world](images/05_1.jpg)
 
 ![screenshot hello_world](images/05_2.jpg)
+
+Add Input dan Selection Widget
+
+![screenshot hello_world](images/06.jpg)

@@ -9,63 +9,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // MaterialApp membungkus seluruh aplikasi.
-    return const MaterialApp(
-      // Scaffold menyediakan struktur dasar halaman.
+    return MaterialApp(
       home: Scaffold(
-        body: MyLayout(),
-      ),
-    );
-  }
-}
-
-class MyLayout extends StatelessWidget {
-  const MyLayout({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    // Padding memberikan jarak di sekitar tombol.
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      // Center menempatkan tombol di tengah layar.
-      child: Center(
-        child: ElevatedButton(
-          child: const Text('Show alert'),
-          onPressed: () {
-            // Memanggil fungsi untuk menampilkan dialog saat tombol ditekan.
-            showAlertDialog(context);
-          },
+        appBar: AppBar(title: const Text("Contoh TextField")),
+        body: const Padding(
+          // Menambahkan Padding agar TextField tidak terlalu mepet ke tepi layar
+          padding: EdgeInsets.all(16.0),
+          child: TextField(
+            // obscureText: false berarti teks yang diketik akan terlihat.
+            // Gunakan 'true' untuk input password.
+            obscureText: false,
+            // decoration digunakan untuk menata tampilan TextField.
+            decoration: InputDecoration(
+              // border: OutlineInputBorder() memberikan bingkai di sekeliling TextField.
+              border: OutlineInputBorder(),
+              // labelText adalah teks placeholder yang akan naik ke atas saat TextField diisi.
+              labelText: 'Nama',
+            ),
+          ),
         ),
       ),
     );
   }
-}
-
-// Fungsi ini bertanggung jawab untuk membuat dan menampilkan AlertDialog.
-showAlertDialog(BuildContext context) {
-  // 1. Membuat tombol aksi untuk dialog.
-  Widget okButton = TextButton(
-    child: const Text("OK"),
-    onPressed: () {
-      // Navigator.pop(context) digunakan untuk menutup dialog.
-      Navigator.pop(context);
-    },
-  );
-
-  // 2. Mengkonfigurasi AlertDialog dengan judul, konten, dan tombol aksi.
-  AlertDialog alert = AlertDialog(
-    title: const Text("My title"),
-    content: const Text("This is my message."),
-    actions: [
-      okButton,
-    ],
-  );
-
-  // 3. Menampilkan dialog ke layar menggunakan fungsi showDialog.
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
 }
