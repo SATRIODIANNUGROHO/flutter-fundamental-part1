@@ -7,72 +7,65 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.red,
+    // MaterialApp membungkus seluruh aplikasi.
+    return const MaterialApp(
+      // Scaffold menyediakan struktur dasar halaman.
+      home: Scaffold(
+        body: MyLayout(),
       ),
-      home: const MyHomePage(title: 'My Increment App'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class MyLayout extends StatelessWidget {
+  const MyLayout({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // Scaffold adalah kerangka utama untuk halaman dengan Material Design.
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium, // Menggunakan headlineMedium untuk kompatibilitas
-            ),
-          ],
+    // Padding memberikan jarak di sekitar tombol.
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      // Center menempatkan tombol di tengah layar.
+      child: Center(
+        child: ElevatedButton(
+          child: const Text('Show alert'),
+          onPressed: () {
+            // Memanggil fungsi untuk menampilkan dialog saat tombol ditekan.
+            showAlertDialog(context);
+          },
         ),
       ),
-      // bottomNavigationBar menampilkan bar di bagian bawah layar.
-      bottomNavigationBar: BottomAppBar(
-        child: Container(
-          height: 50.0,
-        ),
-      ),
-      // floatingActionButton adalah tombol aksi utama.
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment Counter',
-        child: const Icon(Icons.add),
-      ),
-      // Mengatur lokasi floatingActionButton agar berada di tengah dan menempel pada BottomAppBar.
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
+}
+
+// Fungsi ini bertanggung jawab untuk membuat dan menampilkan AlertDialog.
+showAlertDialog(BuildContext context) {
+  // 1. Membuat tombol aksi untuk dialog.
+  Widget okButton = TextButton(
+    child: const Text("OK"),
+    onPressed: () {
+      // Navigator.pop(context) digunakan untuk menutup dialog.
+      Navigator.pop(context);
+    },
+  );
+
+  // 2. Mengkonfigurasi AlertDialog dengan judul, konten, dan tombol aksi.
+  AlertDialog alert = AlertDialog(
+    title: const Text("My title"),
+    content: const Text("This is my message."),
+    actions: [
+      okButton,
+    ],
+  );
+
+  // 3. Menampilkan dialog ke layar menggunakan fungsi showDialog.
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

@@ -11,3 +11,9 @@ Add Text Widget
 Add Image Widget
 
 ![screenshot hello_world](images/03.png)
+
+Add Dialog Widget
+
+![screenshot hello_world](images/05_1.jpg)
+
+![screenshot hello_world](images/05_2.jpg)
